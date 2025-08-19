@@ -1,0 +1,57 @@
+- id: diag-001
+  topic: algebra
+  subtopic: factoring
+  difficulty: 1
+  locale: es
+  stem: "Factoriza: x^2 - 5x + 6"
+  choices: ["(x-2)(x-3)", "(x+2)(x+3)", "(x-1)(x-6)", "No se puede"]
+  answer: 0
+  solution_steps:
+    - "Buscamos dos números que multiplicados den 6 y sumados den -5."
+    - "Son -2 y -3."
+    - "Por tanto, x^2 - 5x + 6 = (x-2)(x-3)."
+
+- id: diag-002
+  topic: algebra
+  subtopic: exponents
+  difficulty: 1
+  locale: es
+  stem: "Simplifica: x^3 · x^2"
+  choices: ["x^5", "x^6", "x^1", "x^0"]
+  answer: 0
+  solution_steps:
+    - "Sumamos exponentes con la misma base: 3 + 2 = 5."
+
+- id: diag-003
+  topic: functions
+  subtopic: domain
+  difficulty: 1
+  locale: es
+  stem: "Dominio de f(x)=1/(x-3)"
+  choices: ["x ≠ 3", "x ≥ 3", "x ≤ 3", "Todos los reales"]
+  answer: 0
+  solution_steps:
+    - "El denominador no puede ser cero: x ≠ 3."
+
+- id: diag-004
+  topic: limits
+  subtopic: substitution
+  difficulty: 1
+  locale: es
+  stem: "lim_{x→2} (x^2-4)/(x-2)"
+  choices: ["4", "2", "∞", "No existe"]
+  answer: 0
+  solution_steps:
+    - "Factorizamos: (x^2-4)=(x-2)(x+2) y cancelamos (x-2)."
+    - "Evaluamos x=2 → 4."
+
+- id: diag-005
+  topic: derivatives
+  subtopic: power_rule
+  difficulty: 1
+  locale: es
+  stem: "Si f(x)=x^5, f'(x)=?"
+  choices: ["5x^4", "x^4", "5x^5", "x^6"]
+  answer: 0
+  solution_steps:
+    - "Regla de potencia: si f(x)=x^n, f'(x)=n x^{n-1}."
