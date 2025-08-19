@@ -6,7 +6,7 @@ import streamlit as st
 def _resolve_base_url(default: str = "https://tu-dominio/calculo-i") -> str:
     env_val = os.environ.get("CALCULO_BASE_URL")
     if env_val:
-        returngit init env_val
+        returngit init_env_val
     try:
         # This will raise if secrets.toml doesn't exist; we guard it.
         secrets_dict = dict(st.secrets)  # may raise
