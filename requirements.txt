@@ -2,3 +2,5 @@ streamlit
 pyyaml
 sympy
 pydantic
+streamlit>=1.33
+pyyaml
