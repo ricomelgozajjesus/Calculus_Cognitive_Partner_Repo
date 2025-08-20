@@ -18,6 +18,60 @@ from grader.rubric import grade_mcq  # requiere carpeta grader/ en la raíz del 
 st.set_page_config(page_title="Cálculo I – Compañero Cognitivo", layout="wide")
 st.title("🟢 Cálculo I – Compañero Cognitivo")
 st.write("Práctica guiada, soluciones narradas y tu progreso en un solo lugar.")
+# 1) Dónde podría estar tu HTML
+CANDIDATE_PATHS = [
+    Path("assets/funciones_1_1.html"),
+    Path("static/funciones_1_1.html"),
+    Path("funciones_1_1.html"),
+]
+
+def find_first_existing(paths):
+    for p in paths:
+        if p.exists():
+            return p
+    return None
+
+def render_html_file(html_path: Path, *, height: int = 900, show_open_link: bool = True):
+    """Lee un archivo HTML y lo incrusta dentro de la app."""
+    try:
+        html = html_path.read_text(encoding="utf-8")
+    except Exception as e:
+        st.error(f"No pude leer el archivo HTML en: {html_path}\n\nDetalle: {e}")
+        return
+
+    # Mostrar un enlace opcional para abrir en pestaña nueva
+    if show_open_link:
+        st.markdown(
+            f'<div style="text-align:right">'
+            f'<a href="{html_path.as_posix()}" target="_blank">🧩 Abrir en pestaña nueva</a>'
+            f'</div>',
+            unsafe_allow_html=True,
+        )
+
+    # Incrustar el HTML en la página (como iframe)
+    st.components.v1.html(html, height=height, scrolling=True)
+
+# -------- Navegación sencilla en la barra lateral --------
+st.sidebar.header("Unidad 1 · Funciones y modelos")
+topic = st.sidebar.selectbox(
+    "Selecciona un tema",
+    ["Selecciona…", "1.1 Definición de función de una variable"]
+)
+
+st.title("Cálculo I · Funciones y modelos (una variable)")
+
+if topic == "1.1 Definición de función de una variable":
+    html_file = find_first_existing(CANDIDATE_PATHS)
+    if html_file:
+        st.subheader("1.1 Definición de función de una variable")
+        render_html_file(html_file, height=900)
+    else:
+        st.error(
+            "No encontré `funciones_1_1.html`. "
+            "Colócalo en `assets/` o `static/` o en la raíz del proyecto, "
+            "o edita `CANDIDATE_PATHS` para apuntar a tu ubicación real."
+        )
+        st.code("\n".join(str(p) for p in CANDIDATE_PATHS), language="bash")
 
 # --- Sidebar / Navegación ---
 page = st.sidebar.radio("Secciones", ["Diagnóstico", "Ejercicios", "Programa", "Progreso"])

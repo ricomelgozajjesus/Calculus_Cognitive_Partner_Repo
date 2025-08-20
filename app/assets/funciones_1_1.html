@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1.1 Definición de función de una variable</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<style>
+  :root{
+    --bg:#ffffff;
+    --ink:#1b1b1b;
+    --muted:#5f6b6b;
+    --accent:#2e7d32;
+    --accent-2:#81c784;
+    --card:#f7faf7;
+    --border:#e5efe5;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue','Noto Sans','Liberation Sans',Arial,'Apple Color Emoji','Segoe UI Emoji';line-height:1.6}
+  .wrapper{max-width:900px;margin:40px auto;padding:0 16px}
+  h1,h2,h3{line-height:1.25}
+  h1{font-size:clamp(1.6rem,2.5vw,2.2rem);margin:0 0 8px}
+  h2{font-size:clamp(1.25rem,2vw,1.6rem);margin-top:28px}
+  h3{font-size:1.1rem;margin-top:20px}
+  .eyebrow{letter-spacing:.08em;color:var(--accent);font-weight:700;font-size:.85rem;text-transform:uppercase}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 20px;margin:14px 0;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+  .muted{color:var(--muted)}
+  .grid{display:grid;gap:14px}
+  @media(min-width:780px){.grid{grid-template-columns:1fr 1fr}}
+  ul{margin:0 0 0 1.2rem}
+  .callout{border-left:4px solid var(--accent);padding:12px 14px;background:linear-gradient(0deg,#f6fff7,#ffffff)}
+  code, pre{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,"Cascadia Mono","Segoe UI Mono","Roboto Mono","Oxygen Mono","Ubuntu Monospace","Source Code Pro","Fira Mono","Droid Sans Mono","Courier New",monospace}
+  pre{background:#0e1111;color:#e6edf3;border-radius:12px;padding:14px;overflow:auto;border:1px solid #1f2424}
+  .btn{display:inline-flex;gap:8px;align-items:center;border:1px solid var(--accent);background:var(--accent);color:white;padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:600}
+  .btn.ghost{background:transparent;color:var(--accent)}
+  .toolbar{display:flex;gap:8px;justify-content:flex-end;margin:-6px 0 10px}
+  .small{font-size:.925rem}
+  details summary{cursor:pointer;font-weight:650}
+  .badge{display:inline-block;background:var(--accent-2);color:#08340a;padding:.18rem .5rem;border-radius:.5rem;font-weight:700;font-size:.75rem;margin-left:.4rem;vertical-align:baseline}
+  .hr{height:1px;background:var(--border);margin:18px 0}
+</style>
+<script>
+function copyBlock(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const text=el.innerText;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('[data-copy="'+id+'"]');
+    if(btn){const old=btn.innerText; btn.innerText='✓ Copiado'; setTimeout(()=>btn.innerText=old,1200);}
+  });
+}
+</script>
+<!-- MathJax for LaTeX -->
+<script>
+window.MathJax = { tex: { inlineMath: [['\\(','\\)'], ['$', '$']] } };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="eyebrow">Cálculo I · Tema 1</div>
+    <h1>1.1 Definición de función de una variable</h1>
+    <p class="muted small">Esta página integra <strong>explicación</strong>, <strong>notas guiadas</strong> y una <strong>demo interactiva</strong> (código Streamlit) para que tus estudiantes exploren funciones en una sola variable.</p>
+
+    <div class="card callout">
+      <strong>Idea central:</strong> Una <em>función</em> es una regla que asigna a cada entrada <em>x</em> (del <em>dominio</em>) exactamente una salida <em>f(x)</em>. La función puede describirse de forma verbal, numérica (tabla), gráfica o algebraica (fórmula).
+    </div>
+
+    <h2>A. Concepto básico</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Definición</h3>
+        <p>Una función \( f: D \to \mathbb{R} \) asigna a cada \( x \in D \) un único valor \( f(x) \). Aquí \(D\) es el <strong>dominio</strong> y el <strong>rango</strong> es el conjunto de posibles valores de \(f(x)\).</p>
+        <ul>
+          <li><strong>Dominio</strong>: entradas permitidas.</li>
+          <li><strong>Rango</strong>: salidas posibles.</li>
+          <li><strong>Variable independiente</strong>: \(x\).</li>
+          <li><strong>Variable dependiente</strong>: \(f(x)\).</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Modelos comunes</h3>
+        <ul>
+          <li><strong>Lineal</strong>: \( f(x)=mx+b \)</li>
+          <li><strong>Cuadrático</strong>: \( f(x)=ax^2+bx+c \)</li>
+          <li><strong>Exponencial</strong>: \( f(x)=ab^{x} \)</li>
+          <li><strong>Logarítmico</strong>: \( f(x)=a+b\log(x) \)</li>
+          <li><strong>Trigonométrico</strong>: \( f(x)=A\sin(\omega x+\phi) \)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <h2>B. Notas guiadas (para el estudiante) <span class="badge">imprimible</span></h2>
+    <div class="card">
+      <p><strong>Definición:</strong> Una función es ________________________________________________.</p>
+      <p><strong>Ejemplo (taxi):</strong> \( C(x)=20+5x \). Dominio: ________; Rango: ________.</p>
+      <p><strong>Identifica el tipo:</strong></p>
+      <ul>
+        <li>\( f(x)=2x+1 \) → ____________________</li>
+        <li>\( g(x)=x^2 \) → ____________________</li>
+        <li>\( h(x)=2^x \) → ____________________</li>
+      </ul>
+      <p><strong>Actividad gráfica:</strong> Dibuja las tres funciones anteriores en el mismo sistema de ejes y compara sus crecimientos.</p>
+      <ul>
+        <li>¿Cuál crece más rápido para \(x\) grande?</li>
+        <li>¿Cuál es siempre positiva?</li>
+        <li>¿Cuál tiene vértice o punto mínimo?</li>
+      </ul>
+    </div>
+
+    <div class="hr"></div>
+
+    <h2>C. Demo interactiva (Streamlit)</h2>
+    <p class="muted small">Copia el siguiente archivo como <code>app_funciones.py</code> y súbelo a tu sitio/Streamlit. Tus estudiantes podrán experimentar en vivo.</p>
+    <div class="toolbar">
+      <button class="btn ghost small" data-copy="code-streamlit" onclick="copyBlock('code-streamlit')">📋 Copiar</button>
+    </div>
+    <pre id="code-streamlit">import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+
+st.title("Funciones de una variable")
+
+func_type = st.selectbox(
+    "Elige una función:",
+    ["Lineal: f(x)=2x+1", "Cuadrática: f(x)=x^2", "Exponencial: f(x)=2^x"]
+)
+
+x = np.linspace(-2, 4, 200)
+
+if func_type == "Lineal: f(x)=2x+1":
+    y = 2*x + 1
+elif func_type == "Cuadrática: f(x)=x^2":
+    y = x**2
+else:
+    y = 2**x
+
+fig, ax = plt.subplots()
+ax.plot(x, y, label=func_type, linewidth=2)
+ax.axhline(0, color="black", linewidth=0.8)
+ax.axvline(0, color="black", linewidth=0.8)
+ax.set_xlabel("x")
+ax.set_ylabel("f(x)")
+ax.legend()
+st.pyplot(fig)</pre>
+
+    <details class="card">
+      <summary>¿Cómo ejecutar?</summary>
+      <ol>
+        <li>Instala dependencias: <code>pip install streamlit matplotlib numpy</code>.</li>
+        <li>Guarda el archivo como <code>app_funciones.py</code>.</li>
+        <li>Ejecuta: <code>streamlit run app_funciones.py</code>.</li>
+      </ol>
+      <p class="muted small">Si ya usas un sitio con múltiples páginas, colócalo dentro de la carpeta <code>pages/</code> de Streamlit.</p>
+    </details>
+
+    <div class="hr"></div>
+
+    <p class="small muted">© Burro Sabio · Material didáctico para Cálculo I.</p>
+  </div>
+</body>
+</html>
